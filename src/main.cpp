@@ -1,9 +1,8 @@
-/**
- * Blink
- *
- * Turns on an LED on for one second,
- * then off for one second, repeatedly.
- */
+//
+// Airq
+// An air quality monitor project for my IoT
+//
+
 #include "Arduino.h"
 #include <ESP32BackBone.h>
 
@@ -18,8 +17,22 @@ void setup()
     // "Required" before starting anything else in the backbone.
     espbb::setup();
 
+    // Configure the wifi using build flags (or you can replace these flags with your wifi info, as
+    // strings like "ssid", "secret".
+    espbb::setWiFi(MY_SSID, MY_WIFI_PASSWORD);
+
+    // Configure OTA.
+    espbb::setOta(MY_OTA_PASSWORD);
+
+    // Configure Mqtt
+    espbb::setMqtt(IPAddress(MY_MQTT_ADDRESS), name);
+
+    // Configure NTP
+    espbb::setupNtp();
+
     // Initialize the display.
-    espbb::setDisplay(false);
+    constexpr bool startThread=false;
+    espbb::setDisplay(startThread);
 
     // Add two "pages" to the display. One says "Hello" and one says "World".
     //
