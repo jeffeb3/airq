@@ -72,15 +72,15 @@ void setup()
             if (sensor.hasMeasurement())
             {
                 // Draw the pm2.5
-                int progress_pm25 = std::min(100, std::max(0, int(100.0*sensor.getPM25()/200.0))); // out of 200
+                int progress_pm25 = std::min(100, std::max(0, int(100.0*sensor.getAQI25()/50.0))); // out of 200
                 display.setFont(ArialMT_Plain_10);
-                display.drawString(0, 16, String("PM2.5 ") + String(sensor.getPM25(),1));
+                display.drawString(0, 16, String("PM2.5 ") + String(sensor.getAQI25(),1));
                 display.drawProgressBar(67, 16, 60, 10, progress_pm25);
 
                 // Draw the pm10
-                int progress_pm10 = std::min(100, std::max(0, int(100.0*sensor.getPM10()/200.0))); // out of 200
+                int progress_pm10 = std::min(100, std::max(0, int(100.0*sensor.getAQI10()/50.0))); // out of 200
                 display.setFont(ArialMT_Plain_10);
-                display.drawString(0, 32, String("PM10 ") + String(sensor.getPM10(),1));
+                display.drawString(0, 32, String("PM10 ") + String(sensor.getAQI10(),1));
                 display.drawProgressBar(67, 32, 60, 10, progress_pm10);
             }
             else
